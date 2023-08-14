@@ -11,9 +11,18 @@ body {
     color: white;
 }
 
-.glow {
+.text-panel-title {
     font-family: Tahoma;
-    font-size: 3rem;
+    margin-bottom: 3vw;
+}
+
+.text-panel-row {
+    color: #ead6d6;
+    font-family: Tahoma;
+    margin-bottom: 1vw;
+}
+
+.glow {
     color: #fff;
     text-align: center;
     -webkit-animation: glow 1s ease-in-out infinite alternate;
