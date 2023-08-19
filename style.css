@@ -1,6 +1,29 @@
+:root {
+    --blurRadius: 3em;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+    background-color: #111; /* Even darker background for scrollbar track */
+}
+
+body::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #262626; /* Much darker scrollbar handle */
+    border: 1.5px solid #111; /* Same color as scrollbar track to give it an inset effect */
+    /* Darker neon-like shadow */
+    box-shadow: 0 0 40px 50px rgba(255, 0, 0, 0.17);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #222; /* Darker when hovered */
+}
+
+/* For Firefox */
 body {
-    /*background: #000001;*/
-    background: rgb(0,0,0);
+    scrollbar-color: #333 #111;
+    scrollbar-width: thin;
+    background: rgb(0, 0, 0);
 }
 
 #image {
@@ -9,36 +32,176 @@ body {
 
 #text-panel {
     color: white;
+    padding-bottom: 5vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    text-align: justify;
+    text-justify: inter-word;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(0deg, rgba(2, 0, 36, 0) 0%, rgba(1, 0, 11, 0.4151785714285714) 25%, rgba(0, 0, 0, 0.47960434173669464) 50%, rgba(0, 0, 0, 0.4964110644257703) 75%, rgba(0, 0, 0, 0) 100%);
 }
 
 .text-panel-title {
     font-family: Tahoma;
-    margin-bottom: 3vw;
+    margin-bottom: 1vw;
+    color: #e1e1e1;
+    text-align: center;
 }
 
 .text-panel-row {
-    color: #ead6d6;
+    color: #dad1da;
     font-family: Tahoma;
     margin-bottom: 1vw;
+    /*background: rgba(0, 0, 0, 0.3);*/
 }
 
-.glow {
-    color: #fff;
-    text-align: center;
-    -webkit-animation: glow 1s ease-in-out infinite alternate;
-    -moz-animation: glow 1s ease-in-out infinite alternate;
-    animation: glow 1s ease-in-out infinite alternate;
+.panel-with-bg {
+    background-color: #2f2c2c;
+    border-radius: 10px;
+    padding: 2vh 2.5vw 2vh 2.5vw;
+    border: 0px;
+    /*offset-x | offset-y | blur-radius | spread-radius | color *!*/
+    box-shadow: #111111 0 5px 10px;
 }
 
-@-webkit-keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+.features-ul li {
+    margin-bottom: 2vh;
+    list-style-type: none;
+    position: relative; /* Needed for absolute positioning of pseudo-element */
+    padding-left: 24px;
+}
+
+.features-ul li::before {
+    content: ''; /* Essential for the pseudo-element to show */
+    position: absolute; /* Absolutely position the pseudo-element relative to the li */
+    left: 0; /* Position it at the start of the li */
+    top: 16%; /* Center it vertically */
+    transform: translateY(-50%); /* Shift up by half its height for perfect centering */
+    width: 16px; /* Width of the SVG icon */
+    height: 16px; /* Height of the SVG icon */
+    background-image: url('data:image/svg+xml, <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"> <path d="M100 180 Q80 150 70 120 Q60 100 80 70 Q100 40 120 70 Q140 100 130 120 Q120 150 100 180" fill="orange" /> <path d="M100 160 Q90 140 95 110 Q100 80 105 110 Q110 140 100 160" fill="yellow" /></svg>');
+    background-size: contain; /* Resize the SVG to fit within the dimensions specified */
+    background-repeat: no-repeat; /* Ensure the SVG doesn't repeat */
+}
+
+.scrollable-panel {
+    height: 12vh;
+    padding: 10px;
+    overflow: hidden;
+    transition: overflow 0.3s ease;
+    overflow-y: auto;
+}
+
+.scrollable-panel::-webkit-scrollbar {
+    width: 12px;
+    background-color: #111; /* Even darker background for scrollbar track */
+}
+
+.scrollable-panel::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #262626; /* Much darker scrollbar handle */
+    border: 1.5px solid #111; /* Same color as scrollbar track to give it an inset effect */
+}
+
+/* Firefox scrollbar styles */
+.scrollable-panel {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f7f7f7;
+}
+
+.glow-static {
+    /* color | offset-x | offset-y | blur-radius */
+    text-shadow: #000000 0 -0.8em var(--blurRadius), #000000 0 -0.2em var(--blurRadius), #000000 0 0 var(--blurRadius), #000000 0 0.2em var(--blurRadius), #000000 0 0.4em var(--blurRadius), #000000 0 0.6em var(--blurRadius), #000000 0 0.8em var(--blurRadius);
+}
+
+.glowing-text {
+    color: white;
+    animation: glow-animation 1.5s infinite alternate; /* Here, 'glow' is the name of the keyframes defined earlier */
+}
+
+
+@keyframes glow-animation {
+    0% {
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px white;
     }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    50% {
+        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white;
+    }
+    100% {
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px white;
     }
 }
 
-#filler {
 
-}
+/*::-webkit-scrollbar {*/
+/*    width: 12px;*/
+/*    background-color: #222; !* Dark background for scrollbar track *!*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*    border-radius: 6px;*/
+/*    background-color: #555; !* Darker scrollbar handle *!*/
+/*    border: 2px solid #222; !* Same color as scrollbar track to give it a inset effect *!*/
+
+/*    !* Neon-like shadow to give it a retro glow *!*/
+/*    box-shadow: 0 0 6px 2px #8d8d8d;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background-color: #444; !* Slightly lighter when hovered *!*/
+/*}*/
+
+/*!* For Firefox *!*/
+/*scrollbar-color: #555 #222;*/
+/*scrollbar-width: thin;*/
+
+/* Scrollbar Option 2
+/*::-webkit-scrollbar {*/
+/*    width: 16px; !* Chunkier width *!*/
+/*    background-color: #111; !* Dark background for scrollbar track *!*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*    border-radius: 3px; !* Less rounded, more "pixel" feel *!*/
+/*    background: repeating-linear-gradient(*/
+/*            45deg,*/
+/*            #444,*/
+/*            #444 5px,*/
+/*            #555 5px,*/
+/*            #555 10px*/
+/*    ); !* Pixelated gradient design *!*/
+
+/*    !* High-contrast border *!*/
+/*    border: 2px solid #eee;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background-color: #666; !* Slightly lighter when hovered *!*/
+/*}*/
+
+/*!* For Firefox *!*/
+/*scrollbar-color: #555 #111;*/
+/*scrollbar-width: thin;*/
+
+/* For Webkit browsers (like Chrome, Safari) */
+/*::-webkit-scrollbar {*/
+/*    width: 14px;*/
+/*    background-color: #111; !* Dark background for scrollbar track *!*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*    border-radius: 7px;*/
+/*    !* Gradient colors to give it a mystical feel *!*/
+/*    background: linear-gradient(to bottom, #b34d4d, #4d73b3, #4db372, #b3b34d);*/
+/*    !* Outer glow for added flair *!*/
+/*    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    !* Changing gradient on hover for a dynamic feel *!*/
+/*    background: linear-gradient(to bottom, #e56b6b, #6b8de5, #6be597, #e5e56b);*/
+/*}*/
+
+/*!* For Firefox *!*/
+/*scrollbar-color: rebeccapurple #111;*/
+/*scrollbar-width: thin;*/
