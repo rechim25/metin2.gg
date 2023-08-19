@@ -12,7 +12,7 @@ function repositionTextPanel() {
     textPanel.style.top = `${imgHeight * 27 / 100}px`;
     textPanel.style.left = `${imgWidth * 25 / 100}px`
     textPanel.style.width = `${imgWidth * 53 / 100}px`
-    // textPanel.style.fontSize = `${imgWidth * 10 / 100}px`
+    textPanel.style.fontSize = `${imgWidth * 1.2 / 100}px`
 }
 
 window.onload = repositionTextPanel;
